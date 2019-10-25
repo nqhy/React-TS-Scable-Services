@@ -1,0 +1,38 @@
+{
+  presets: [
+    [
+      '@babel/preset-env',
+      {
+        modules: false
+      }
+    ],
+    '@babel/preset-typescript',
+  ],
+  plugins: [
+    [
+      'module-resolver',
+      {
+        root: ['./src'],
+        extensions: ['.js', '.ts', '.tsx'],
+        alias: {
+          '*': ['*'],
+        },
+      },
+    ],
+    [
+      '@babel/plugin-proposal-decorators',
+      {
+        legacy: true,
+      },
+    ],
+    [
+      '@babel/plugin-transform-runtime',
+      {
+        helpers: true,
+        regenerator: false,
+      },
+    ],
+    '@babel/proposal-object-rest-spread',
+    'react-hot-loader/babel',
+  ],
+}
