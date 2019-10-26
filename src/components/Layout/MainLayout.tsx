@@ -2,24 +2,19 @@ import * as React from 'react';
 import styled from 'styled-components';
 
 const Wrap = styled.div`
-  background: #fafafa;
+  background: #ffffff;
 `;
 
-const Body = styled.div`
-  display: flex;
-`;
 const Content = styled.div`
-  flex: 1;
-  margin-left: 30px;
+  overflow: scroll;
+  height: 100vh;
 `;
 
 const MainLayout = (props: any) => {
   const { children } = props;
   return (
     <Wrap>
-      <Body>
-        <Content>{children}</Content>
-      </Body>
+      <Content>{children}</Content>
     </Wrap>
   );
 };

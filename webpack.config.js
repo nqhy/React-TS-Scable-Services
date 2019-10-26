@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const config = {
   entry: ['react-hot-loader/patch', './src/index.tsx'],
@@ -54,7 +55,14 @@ const config = {
   devServer: {
     contentBase: './dist',
   },
-  plugins: [new LodashModuleReplacementPlugin(), new Dotenv()],
+  optimization: {
+    minimizer: [new UglifyJsPlugin()],
+  },
+  plugins: [
+    new LodashModuleReplacementPlugin(),
+    new Dotenv(),
+    new webpack.NamedModulesPlugin(),
+  ],
 };
 
 module.exports = config;

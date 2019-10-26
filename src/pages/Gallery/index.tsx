@@ -1,24 +1,54 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import styled from 'styled-components';
 
-import useSagaInjector from '../../redux/utils/useSagaInjector';
-import useReducerInjector from '../../redux/utils/useReducerInjector';
-import { context } from './constants';
-import sagas from './sagas';
-import reducers from './reducers';
-import { galleryRequest } from './actions';
+import useContainer from './container';
+import { Header, SearchBar, Gallery } from './partials';
 
-const Sample = () => {
-  useSagaInjector(context, sagas);
-  useReducerInjector(context, reducers);
+const fetchData = [
+  {
+    url:
+      'https://images.unsplash.com/photo-1445723356089-6dbb51d9c4f8?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=980&h=980&fit=crop&s=6e476c6e7ce1adac161295616d1bec05',
+  },
+  {
+    url:
+      'https://images.unsplash.com/photo-1445723356089-6dbb51d9c4f8?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=980&h=980&fit=crop&s=6e476c6e7ce1adac161295616d1bec05',
+  },
+  {
+    url:
+      'https://images.unsplash.com/photo-1445723356089-6dbb51d9c4f8?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=980&h=980&fit=crop&s=6e476c6e7ce1adac161295616d1bec05',
+  },
+  {
+    url:
+      'https://images.unsplash.com/photo-1445723356089-6dbb51d9c4f8?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=980&h=980&fit=crop&s=6e476c6e7ce1adac161295616d1bec05',
+  },
+  {
+    url:
+      'https://images.unsplash.com/photo-1445723356089-6dbb51d9c4f8?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=980&h=980&fit=crop&s=6e476c6e7ce1adac161295616d1bec05',
+  },
+  {
+    url:
+      'https://images.unsplash.com/photo-1445723356089-6dbb51d9c4f8?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=980&h=980&fit=crop&s=6e476c6e7ce1adac161295616d1bec05',
+  },
+  {
+    url:
+      'https://images.unsplash.com/photo-1445723356089-6dbb51d9c4f8?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=980&h=980&fit=crop&s=6e476c6e7ce1adac161295616d1bec05',
+  },
+  {
+    url:
+      'https://images.unsplash.com/photo-1445723356089-6dbb51d9c4f8?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=980&h=980&fit=crop&s=6e476c6e7ce1adac161295616d1bec05',
+  },
+];
 
-  const dispatch = useDispatch<any>();
-  useEffect(() => {
-    dispatch(galleryRequest());
-    return () => {};
-  }, []);
+const Sample: React.SFC<any> = () => {
+  const { selectedFunc, setFunc } = useContainer();
 
-  return <h1>Huy D</h1>;
+  return (
+    <>
+      <Header selectedFunc={selectedFunc} onHandleSelect={setFunc} />
+      <SearchBar onHandleChange={() => null} />
+      <Gallery data={fetchData} />
+    </>
+  );
 };
 
 export default Sample;
