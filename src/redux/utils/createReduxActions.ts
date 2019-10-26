@@ -23,3 +23,4 @@ export function createReduxActionsExtend(prefix: string) {
     createAction(`${prefix}Removed`),
   ];
 }
+
