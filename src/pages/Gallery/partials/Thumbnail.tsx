@@ -4,11 +4,13 @@ import styled, { css } from 'styled-components';
 import { stageImage } from '../types';
 import { heartIcon } from '../../../styles/images';
 
+import { heightScreen } from '../../../utils/dimension';
+
 const ThumbnailWrapper = styled.div`
   display: flex;
   flex-basis: calc(100% / 4);
   flex-shrink: 0;
-  height: 270px;
+  height: ${(heightScreen * 30) / 100}px;
   @media (max-width: 1200px) {
     flex-basis: calc(100% / 3);
   }

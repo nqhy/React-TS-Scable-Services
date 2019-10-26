@@ -6,7 +6,6 @@ const Wrap = styled.div`
 `;
 
 const Content = styled.div`
-  overflow: scroll;
   height: 100vh;
 `;
 

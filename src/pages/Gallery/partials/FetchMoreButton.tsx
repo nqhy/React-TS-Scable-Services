@@ -3,26 +3,43 @@ import styled from 'styled-components';
 
 const FetchMoreButtonWrapper = styled.div`
   display: flex;
-  width: 100%;
-  height: 15%;
   flex: 1;
+  padding: 3%;
   justify-content: center;
   align-items: center;
 `;
 
+const Button = styled.button`
+  width: 200px;
+  height: 50px;
+  background: black;
+  color: white;
+  font-size: 22px;
+  border-radius: 30px;
+  font-weight: 700;
+  &:disabled {
+    opacity: 0.5;
+  }
+`;
+
 interface FetchMoreButtonProps {
-  setSearchKey: Function;
-  value: string;
+  onSubmit: any;
+  isDisplay: boolean;
+  canFetchMore: boolean;
 }
 
 const FetchMoreButton: React.SFC<FetchMoreButtonProps> = (
   props: FetchMoreButtonProps,
 ) => {
-  const { setSearchKey, value } = props;
-  const handleChange = (e: any) => {
-    setSearchKey(e.target.value);
-  };
-  return <FetchMoreButtonWrapper></FetchMoreButtonWrapper>;
+  const { isDisplay, onSubmit, canFetchMore } = props;
+  if (!isDisplay) return null;
+  return (
+    <FetchMoreButtonWrapper>
+      <Button disabled={!canFetchMore} onClick={onSubmit}>
+        Fetch More
+      </Button>
+    </FetchMoreButtonWrapper>
+  );
 };
 
 export default FetchMoreButton;
