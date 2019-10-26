@@ -8,7 +8,7 @@ const ThumbnailWrapper = styled.div`
   display: flex;
   flex-basis: calc(100% / 4);
   flex-shrink: 0;
-  height: 300px;
+  height: 270px;
   @media (max-width: 1200px) {
     flex-basis: calc(100% / 3);
   }
@@ -32,6 +32,8 @@ const Image = styled.div<{ src: string }>`
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
+  padding-right: 2%;
+  padding-bottom: 2%;
   cursor: pointer;
   ${({ src }) =>
     src &&
