@@ -9,6 +9,7 @@ import {
 } from './config/types';
 import { defaultConfig, ERROR_CODE } from './config';
 import history from '../utils/history';
+import HandleError from '../helpers/handleErrors';
 
 export default class BaseAPIService {
   private instance: AxiosInstance;
@@ -28,21 +29,22 @@ export default class BaseAPIService {
   }
 
   public handleError(err: ErrorResponse) {
-    const { code, description } = err;
-    if (ERROR_CODE[code] === '404') return history.push('/not-found');
+    const handleError = new HandleError<any>(err);
+    const code: string = handleError.code;
+    if (code === '404') return history.push('/404');
     // Handle Description Latter
     throw err;
   }
 
   public async request({ method, url, data, config }: APIServiceRequestParams) {
     try {
+      const newConfig = _merge(config, this.config);
       if (method === 'get' || method === 'delete') {
-        return await this.instance[method](url, config);
+        return await this.instance[method](url, newConfig);
       }
-      return await this.instance[method](url, data, config);
+      return await this.instance[method](url, data, newConfig);
     } catch (err) {
       return this.handleError(err);
     }
   }
 }
-

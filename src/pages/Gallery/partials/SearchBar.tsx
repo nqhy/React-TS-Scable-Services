@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const SearchBarWrapper = styled.div`
   display: flex;
   width: 100%;
-  height: 20%;
+  height: 15%;
   flex: 1;
   justify-content: center;
   align-items: center;
@@ -14,10 +14,10 @@ const SearchInput = styled.input.attrs<any, any>({
   placeholder: 'Start Searching For Images!',
 })`
   border: none;
-  height: 20%;
   width: 60%;
   font-size: 24px;
   font-weight: 500;
+  padding: 1%;
   border-bottom: 1px solid #585858;
   ::placeholder,
   ::-webkit-input-placeholder {

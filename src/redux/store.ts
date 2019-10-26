@@ -8,8 +8,9 @@ import { ONCE_TILL_UNMOUNT, DAEMON } from './constants';
 
 const reducer = persistReducer(
   {
-    key: 'ylinkee',
+    key: 'gallereasy',
     storage,
+    whitelist: ['gallery'],
   },
   rootReducer,
 );

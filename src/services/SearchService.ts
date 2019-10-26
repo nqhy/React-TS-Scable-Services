@@ -1,10 +1,15 @@
 import MicroServices from './config/MicroServices';
 
 export default class SampleService extends MicroServices {
-  public fetchData = async () => {
+  public getImages = async (param: string) => {
     const response = await this.client.request({
       method: 'get',
-      url: '/sample-fetch',
+      url: '/search',
+      config: {
+        params: {
+          q: param,
+        },
+      },
     });
 
     return response;

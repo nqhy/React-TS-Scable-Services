@@ -8,7 +8,6 @@ const GalleryWrapper = styled.div`
   display: flex;
   flex: 1;
   flex-flow: wrap;
-  height: 100vh;
   padding-left: 5%;
   padding-right: 5%;
 `;

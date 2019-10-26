@@ -9,6 +9,7 @@ import history from './utils/history';
 import GlobalStyles from './components/GlobalStyles';
 import RoutePublic from './components/RoutePublic';
 import MainLayout from './components/Layout/MainLayout';
+import ErrorBoundary from './components/ErrorBoundary';
 
 const Gallery = lazy(() => import('./pages/Gallery'));
 
@@ -24,16 +25,18 @@ function App() {
             titleTemplate="Gallereasy"
             titleAttributes={{ itemprop: 'name', lang: 'en-vi' }}
           />
-          <Suspense fallback={<div>Loading...</div>}>
-            <Switch>
-              <RoutePublic
-                isAuthenticated={false}
-                path="/"
-                component={Gallery}
-                layout={MainLayout}
-              />
-            </Switch>
-          </Suspense>
+          <ErrorBoundary>
+            <Suspense fallback={<div>Loading...</div>}>
+              <Switch>
+                <RoutePublic
+                  isAuthenticated={false}
+                  path="/"
+                  component={Gallery}
+                  layout={MainLayout}
+                />
+              </Switch>
+            </Suspense>
+          </ErrorBoundary>
           <GlobalStyles />
         </div>
       </ThemeProvider>
