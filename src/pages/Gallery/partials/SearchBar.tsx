@@ -27,13 +27,18 @@ const SearchInput = styled.input.attrs<any, any>({
 `;
 
 interface SearchBarProps {
-  onHandleChange: Function;
+  setSearchKey: Function;
+  value: string;
 }
 
 const SearchBar: React.SFC<SearchBarProps> = (props: SearchBarProps) => {
+  const { setSearchKey, value } = props;
+  const handleChange = (e: any) => {
+    setSearchKey(e.target.value);
+  };
   return (
     <SearchBarWrapper>
-      <SearchInput />
+      <SearchInput onChange={handleChange} value={value || ''} />
     </SearchBarWrapper>
   );
 };

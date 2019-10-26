@@ -9,5 +9,5 @@ export default (key: any, saga: any, mode = RESTART_ON_REMOUNT) => {
     return () => {
       store.ejectSaga(key);
     };
-  });
+  }, [key, saga, mode]);
 };

@@ -10,6 +10,7 @@ import GlobalStyles from './components/GlobalStyles';
 import RoutePublic from './components/RoutePublic';
 import MainLayout from './components/Layout/MainLayout';
 import ErrorBoundary from './components/ErrorBoundary';
+import NotFound from './components/NotFound';
 
 const Gallery = lazy(() => import('./pages/Gallery'));
 
@@ -32,6 +33,12 @@ function App() {
                   isAuthenticated={false}
                   path="/"
                   component={Gallery}
+                  layout={MainLayout}
+                />
+                <RoutePublic
+                  isAuthenticated={false}
+                  path="/404"
+                  component={NotFound}
                   layout={MainLayout}
                 />
               </Switch>

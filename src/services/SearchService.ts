@@ -15,4 +15,3 @@ export default class SampleService extends MicroServices {
     return response;
   };
 }
-

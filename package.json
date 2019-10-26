@@ -33,6 +33,7 @@
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
     "redux-saga": "^1.1.1",
+    "reselect": "^4.0.0",
     "styled-components": "^4.4.0"
   },
   "devDependencies": {
@@ -54,6 +55,7 @@
     "@types/redux-actions": "^2.6.1",
     "@types/redux-immutable-state-invariant": "^2.1.1",
     "@types/redux-logger": "^3.0.7",
+    "@types/reselect": "^2.2.0",
     "@types/styled-components": "^4.1.19",
     "@typescript-eslint/eslint-plugin": "^2.0.0",
     "@typescript-eslint/parser": "^2.0.0",

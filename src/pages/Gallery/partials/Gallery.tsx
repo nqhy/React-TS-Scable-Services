@@ -19,8 +19,8 @@ interface GalleryProps {
 const Gallery: React.SFC<GalleryProps> = (props: GalleryProps) => {
   const { data } = props;
   const displayThumbNail = useCallback(() => {
-    return data.map((value, index) => {
-      return <Thumbnail src={value.url} key={index} />;
+    return data.map((value: ImageAttributes) => {
+      return <Thumbnail src={value.url} key={value.id} />;
     });
   }, [data]);
 

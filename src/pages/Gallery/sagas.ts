@@ -3,14 +3,16 @@ import { all, call, put, takeLatest } from 'redux-saga/effects';
 import { GALLERY_REQUEST } from './constants';
 import { gallerySuccess, galleryFail } from './actions';
 import { searchServiceByGiphy } from '../../services';
+import { ImageResponse } from './types';
 
-export function* fetchGallerySaga() {
+export function* fetchGallerySaga(action: any) {
   try {
-    const response = yield call(
+    const { payload } = action;
+    const { data }: any = yield call(
       [searchServiceByGiphy, searchServiceByGiphy.getImages],
-      'cat',
+      payload,
     );
-    yield put(gallerySuccess());
+    yield put(gallerySuccess(data));
   } catch (err) {
     yield put(galleryFail(err));
   }
