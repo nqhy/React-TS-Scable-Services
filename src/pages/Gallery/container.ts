@@ -6,24 +6,41 @@ import useReducerInjector from '../../redux/utils/useReducerInjector';
 import { context } from './constants';
 import sagas from './sagas';
 import reducers from './reducers';
-import { galleryRequest } from './actions';
+import { galleryRequest, updateFavourties } from './actions';
 import { FunctionsName } from './types';
-import { galleryDataSelector } from './selectors';
+import {
+  galleryDataSelector,
+  galleryOffsetSelector,
+  canFetchMoreSelector,
+} from './selectors';
 
 export default () => {
   useSagaInjector(context, sagas);
   useReducerInjector(context, reducers);
-  const dataGallery = useSelector(galleryDataSelector);
 
-  const [searchKey, setSearchKey] = useState<any>(undefined);
-
+  // Hooks Redux
   const dispatch = useDispatch<any>();
 
+  // State Container
   const [selectedFunc, setFunc] = useState<FunctionsName>('search');
+  const [searchKey, setSearchKey] = useState<any>(undefined);
 
+  // Selectors
+  const dataGallery = useSelector(galleryDataSelector);
+  const canFetchMore = useSelector(canFetchMoreSelector);
+  const offset = useSelector(galleryOffsetSelector);
+
+  // Actions
+  const onHandleFetchMore = () =>
+    dispatch(galleryRequest({ value: searchKey, offset, isNewFetch: false }));
+
+  // Life Cycle
   useEffect(() => {
-    dispatch(galleryRequest(searchKey));
+    dispatch(galleryRequest({ value: searchKey, offset: 0, isNewFetch: true }));
   }, [searchKey]);
+
+  // Simple Logic
+  const isDisplayFetchMoreButton = dataGallery.length > 0;
 
   return {
     selectedFunc,
@@ -31,5 +48,8 @@ export default () => {
     searchKey,
     setSearchKey,
     data: dataGallery,
+    isDisplayFetchMoreButton,
+    onHandleFetchMore,
+    canFetchMore,
   };
 };

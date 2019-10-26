@@ -19,6 +19,7 @@ export interface ImageGiphyResponseData {
 }
 
 export interface PaginationResponse {
+  total_count: number;
   count: number;
   offset: number;
 }
@@ -30,14 +31,19 @@ export interface ImageResponseData {
   type: string;
 }
 
-export interface ImageResponse<T> {
+export interface ResultImageResponse<T> {
   data: Array<T>;
   pagination: PaginationResponse;
 }
 
-export interface GalleryInitState<T> {
-  data: Array<ImageResponse<T>>;
+export interface ImageResponse<T> {
+  result: ResultImageResponse<T>;
+  isNewFetch: boolean;
+}
+
+export interface GalleryInitState {
+  data: Array<ImageResponseData>;
   pagination: PaginationResponse;
-  favourites?: Array<ImageAttributes>;
+  favourites: Array<ImageAttributes>;
   errors: string;
 }

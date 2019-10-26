@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
 import useContainer from './container';
-import { Header, SearchBar, Gallery } from './partials';
+import { Header, SearchBar, Gallery, FetchMoreButton } from './partials';
 
 const Sample: React.SFC<any> = () => {
   const {
@@ -11,6 +11,9 @@ const Sample: React.SFC<any> = () => {
     setFunc,
     setSearchKey,
     searchKey,
+    isDisplayFetchMoreButton,
+    onHandleFetchMore,
+    canFetchMore,
   } = useContainer();
 
   return (
@@ -18,6 +21,11 @@ const Sample: React.SFC<any> = () => {
       <Header selectedFunc={selectedFunc} onHandleSelect={setFunc} />
       <SearchBar setSearchKey={setSearchKey} value={searchKey} />
       <Gallery data={data} />
+      <FetchMoreButton
+        isDisplay={isDisplayFetchMoreButton}
+        onSubmit={onHandleFetchMore}
+        canFetchMore={canFetchMore}
+      />
     </>
   );
 };

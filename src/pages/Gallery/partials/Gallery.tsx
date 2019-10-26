@@ -3,10 +3,13 @@ import styled, { css } from 'styled-components';
 
 import Thumbnail from './Thumbnail';
 import { ImageAttributes } from '../types';
+import { heightScreen } from '../../../utils/dimension';
 
 const GalleryWrapper = styled.div`
   display: flex;
   flex: 1;
+  max-height: ${(heightScreen * 60) / 100}px;
+  overflow: scroll;
   flex-flow: wrap;
   padding-left: 5%;
   padding-right: 5%;
