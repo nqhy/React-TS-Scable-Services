@@ -3,6 +3,8 @@ import { hot } from 'react-hot-loader/root';
 import { Router, Switch, Route } from 'react-router-dom';
 import Helmet from 'react-helmet';
 import { ThemeProvider } from 'styled-components';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import theme from './utils/theme';
 import history from './utils/history';
@@ -28,6 +30,7 @@ function App() {
           />
           <ErrorBoundary>
             <Suspense fallback={<div>Loading...</div>}>
+              <ToastContainer />
               <Switch>
                 <RoutePublic
                   isAuthenticated={false}

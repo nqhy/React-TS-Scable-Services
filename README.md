@@ -9,6 +9,7 @@
 . React core and hooks
 . Resful API with axios
 . Reselect
+. Notify Using React-Toastify
 ```
 
 ### Install Packages

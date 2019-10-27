@@ -1,6 +1,7 @@
 import BaseApiService from './BaseApiService';
 import SearchService from './SearchService';
 import { limitGiphyImages } from '../constants';
+import GiphyHandleError from '../helpers/handleError/GiphyHandleError';
 
 const GiphySearchService = new BaseApiService({
   baseURL: process.env.REACT_APP_GIPHY_URL_API,
@@ -9,6 +10,8 @@ const GiphySearchService = new BaseApiService({
     api_key: process.env.GIPHY_KEY,
   },
 });
+
+GiphySearchService.errorHandlerService = GiphyHandleError;
 
 export const searchServiceByGiphy = new SearchService({
   service: GiphySearchService,
