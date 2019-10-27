@@ -1,10 +1,11 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-import { stageImage } from '../types';
+import { ImageAttributes, stageImage } from '../types';
 import { heartIcon } from '../../../styles/images';
 
 import { heightScreen } from '../../../utils/dimension';
+import useToggleFavourite from '../hooks/useToggleFavourite';
 
 const ThumbnailWrapper = styled.div`
   display: flex;
@@ -67,18 +68,25 @@ const IconFavourite = styled.div<{ src: any; stage: stageImage }>`
 `;
 
 interface ThumbnailProps {
-  onSelect?: Function;
-  stage?: stageImage;
-  src: string;
+  data: ImageAttributes;
 }
 
 const Thumbnail: React.SFC<ThumbnailProps> = (props: ThumbnailProps) => {
-  const { src } = props;
+  const {
+    data: { url, stage, id },
+  } = props;
+
+  const [toogleFavorite] = useToggleFavourite();
+
+  const handleClickIcon = () => {
+    toogleFavorite({ stage, id, data: props.data });
+  };
+
   return (
-    <ThumbnailWrapper>
+    <ThumbnailWrapper onClick={handleClickIcon}>
       <ImageWrapper>
-        <Image src={src}>
-          <IconFavourite stage={'default'} src={heartIcon} />
+        <Image src={url}>
+          <IconFavourite stage={stage} src={heartIcon} />
         </Image>
       </ImageWrapper>
     </ThumbnailWrapper>

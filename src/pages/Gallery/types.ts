@@ -2,10 +2,23 @@ export type FunctionsName = 'search' | 'favourites';
 
 export type stageImage = 'default' | 'favourite';
 
+export interface IndexType {
+  indexSearch: number;
+  indexFavourite: number;
+}
+
 export interface ImageAttributes {
   url: string;
   id: string;
-  stage?: stageImage;
+  stage: stageImage;
+  indexSearch: number;
+  indexFavourite?: number;
+}
+
+export interface ToggleFavouriteActionParams {
+  stage: stageImage;
+  id: string;
+  data: ImageAttributes;
 }
 
 export interface ImagesGiphy {
@@ -27,8 +40,10 @@ export interface PaginationResponse {
 export interface ImageResponseData {
   url: string;
   id: string;
-  stage?: stageImage;
+  stage: stageImage;
   type: string;
+  indexFavourite: number;
+  indexSearch: number;
 }
 
 export interface ResultImageResponse<T> {
@@ -44,6 +59,11 @@ export interface ImageResponse<T> {
 export interface GalleryInitState {
   data: Array<ImageResponseData>;
   pagination: PaginationResponse;
-  favourites: Array<ImageAttributes>;
+  errors: string;
+  searchKey: string | undefined;
+}
+
+export interface FavouritesInitState {
+  data: Array<ImageResponseData>;
   errors: string;
 }
