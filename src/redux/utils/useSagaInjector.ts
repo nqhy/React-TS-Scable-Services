@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 
 import { store } from '../store';
-import { RESTART_ON_REMOUNT } from '../constants';
+import { ONCE_TILL_UNMOUNT } from '../constants';
 
-export default (key: any, saga: any, mode = RESTART_ON_REMOUNT) => {
+export default (key: any, saga: any, mode = ONCE_TILL_UNMOUNT) => {
   useEffect(() => {
     store.injectSaga(key, saga, mode);
     return () => {

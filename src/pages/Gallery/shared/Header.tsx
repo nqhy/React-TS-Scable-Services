@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 
 import { FunctionsName } from '../types';
+import { heightScreen } from '../../../utils/dimension';
 
 const HeaderWrapper = styled.div`
   width: 100%;
@@ -10,6 +11,7 @@ const HeaderWrapper = styled.div`
   padding-bottom: 1%;
   border-bottom: 1px solid black;
   padding-left: 10%;
+  height: ${(heightScreen * 5) / 100}px;
 `;
 
 const TitleWrapper = styled.div`
@@ -53,10 +55,11 @@ const Selection = styled(NormalTitle)<{ isSelected?: boolean }>`
 interface HeaderProps {
   selectedFunc: FunctionsName;
   onHandleSelect: Function;
+  totalFavourite: number;
 }
 
 const Header: React.SFC<HeaderProps> = (props: HeaderProps) => {
-  const { selectedFunc, onHandleSelect } = props;
+  const { selectedFunc, onHandleSelect, totalFavourite } = props;
 
   const handleSelectFunc = (value: FunctionsName) => {
     onHandleSelect(value);
@@ -77,7 +80,7 @@ const Header: React.SFC<HeaderProps> = (props: HeaderProps) => {
         <Selection
           isSelected={selectedFunc === 'favourites'}
           onClick={() => handleSelectFunc('favourites')}>
-          Favourites (1)
+          Favourites{totalFavourite > 0 && ` (${totalFavourite})`}
         </Selection>
       </SelectionWrapper>
     </HeaderWrapper>

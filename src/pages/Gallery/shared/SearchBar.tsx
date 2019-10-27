@@ -1,10 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { heightScreen } from '../../../utils/dimension';
+
 const SearchBarWrapper = styled.div`
   display: flex;
   width: 100%;
-  height: 15%;
+  height: ${(heightScreen * 15) / 100}px;
   flex: 1;
   justify-content: center;
   align-items: center;
@@ -28,14 +30,16 @@ const SearchInput = styled.input.attrs<any, any>({
 
 interface SearchBarProps {
   setSearchKey: Function;
-  value: string;
+  value: string | undefined;
 }
 
 const SearchBar: React.SFC<SearchBarProps> = (props: SearchBarProps) => {
   const { setSearchKey, value } = props;
+
   const handleChange = (e: any) => {
     setSearchKey(e.target.value);
   };
+
   return (
     <SearchBarWrapper>
       <SearchInput onChange={handleChange} value={value || ''} />

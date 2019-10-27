@@ -2,8 +2,8 @@ import { all, call, put, debounce } from 'redux-saga/effects';
 
 import { GALLERY_REQUEST } from './constants';
 import { gallerySuccess, galleryFail } from './actions';
-import { searchServiceByGiphy } from '../../services';
-import { ImageResponse } from './types';
+import { searchServiceByGiphy } from '../../../services';
+import { ImageResponse } from '../types';
 
 export function* fetchGallerySaga(action: any) {
   try {

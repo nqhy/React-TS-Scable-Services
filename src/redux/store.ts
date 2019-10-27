@@ -8,9 +8,9 @@ import { ONCE_TILL_UNMOUNT, DAEMON } from './constants';
 
 const reducer = persistReducer(
   {
-    key: 'gallereasy',
+    key: 'root',
     storage,
-    whitelist: ['gallery'],
+    whitelist: ['favourites'],
   },
   rootReducer,
 );
@@ -48,7 +48,7 @@ const configStore = (initialState = {}) => {
 
   store.injectSaga = (key: any, saga: any, mode: any) => {
     const hasSaga = Reflect.has(store.injectedSagas, key);
-    if (!hasSaga || (mode === DAEMON && mode === ONCE_TILL_UNMOUNT)) {
+    if (!hasSaga || mode === ONCE_TILL_UNMOUNT) {
       store.injectedSagas[key] = { saga, mode, task: sagaMiddleware.run(saga) };
     }
   };
@@ -74,8 +74,6 @@ const configStore = (initialState = {}) => {
 
 const { store, persistor } = configStore();
 
-// eslint-disable-next-line no-undef
-const globalRef: any = global;
-globalRef.store = store;
+(global as any).store = store;
 
 export { store, persistor };
