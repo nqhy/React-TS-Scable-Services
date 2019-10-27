@@ -35,7 +35,18 @@ export default handleActions<any>(
         const {
           result: { data, pagination },
           isNewFetch,
+          favouriteData = [],
         } = payload;
+        const checkInFavouriteData = (id: string) => {
+          let result = false;
+          favouriteData.map(value => {
+            if (value.id === id) {
+              result = true;
+              return result;
+            }
+          });
+          return result;
+        };
         if (data.length === 0) {
           draft.data = [];
           draft.pagination = {
@@ -52,11 +63,13 @@ export default handleActions<any>(
             const newIndex = index + addingOffset;
             draft.data[newIndex] = {};
             draft.data[newIndex].url = value.images.original.url;
-            draft.data[newIndex].stage = 'default';
             draft.data[newIndex].url = value.images.original.url;
             draft.data[newIndex].type = value.type;
             draft.data[newIndex].id = value.id;
             draft.data[newIndex].indexSearch = newIndex;
+            if (checkInFavouriteData(value.id)) {
+              draft.data[newIndex].stage = 'favourite';
+            } else draft.data[newIndex].stage = 'default';
           });
           draft.pagination = pagination;
           if (isNewFetch) draft.pagination.offset = 0 + pagination.count;

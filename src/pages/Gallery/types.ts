@@ -54,6 +54,7 @@ export interface ResultImageResponse<T> {
 export interface ImageResponse<T> {
   result: ResultImageResponse<T>;
   isNewFetch: boolean;
+  favouriteData?: Array<ImageResponseData>;
 }
 
 export interface GalleryInitState {
