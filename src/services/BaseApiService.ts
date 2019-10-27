@@ -1,15 +1,8 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 import _merge from 'lodash/merge';
 
-import {
-  APIServiceInitParams,
-  APIServiceRequestParams,
-  ErrorResponse,
-  HeaderParams,
-} from './config/types';
-import { defaultConfig, ERROR_CODE } from './config';
-import history from '../utils/history';
-import HandleError from '../helpers/handleErrors';
+import { APIServiceRequestParams, HeaderParams } from './config/types';
+import { defaultConfig } from './config';
 
 export default class BaseAPIService {
   private instance: AxiosInstance;
@@ -17,6 +10,8 @@ export default class BaseAPIService {
   private headers: any;
 
   private config: AxiosRequestConfig;
+
+  private ErrorHandler: any;
 
   constructor(config: AxiosRequestConfig = {}) {
     this.config = _merge(defaultConfig, config);
@@ -28,12 +23,8 @@ export default class BaseAPIService {
     this.headers[key] = value;
   }
 
-  public handleError(err: ErrorResponse) {
-    const handleError = new HandleError<any>(err);
-    const code: string = handleError.code;
-    if (code === '404') return history.push('/404');
-    // Handle Description Latter
-    throw err;
+  set errorHandlerService(value: any) {
+    this.ErrorHandler = value;
   }
 
   public async request({ method, url, data, config }: APIServiceRequestParams) {
@@ -44,7 +35,8 @@ export default class BaseAPIService {
       }
       return await this.instance[method](url, data, newConfig);
     } catch (err) {
-      return this.handleError(err);
+      const errorHandler = new this.ErrorHandler(err);
+      errorHandler.process();
     }
   }
 }

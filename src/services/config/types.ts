@@ -1,14 +1,10 @@
 import { AxiosRequestConfig } from 'axios';
 import BaseApiService from '../BaseApiService';
+import HandleError from '../../helpers/handleError';
 
 type MethodRequest = 'get' | 'delete' | 'put' | 'patch' | 'post';
 export interface APIServiceInitParams {
   config?: AxiosRequestConfig;
-}
-
-export interface ErrorResponse {
-  code: number;
-  description: string;
 }
 
 export interface HeaderParams {
