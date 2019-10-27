@@ -1,11 +1,13 @@
-#React and TypeScript
+# React and TypeScript
 
 # Essential Libraries
 - Redux
 - Saga Middleware
+- Redux Persist
 - styled-components
 - React core and hooks
 - Resful API with axios
+- Reselect
 
 ### Install Packages
 yarn 
