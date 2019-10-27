@@ -2,7 +2,9 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 
 import useContainer from './container';
+import { LoadingStatus } from '../../../helpers/loading/types';
 import { SearchBar, Gallery, FetchMoreButton } from '../shared';
+import Loader from '../../../components/Loader';
 
 const Wrapper = styled.div<{ isDisplay: boolean }>`
   ${({ isDisplay }) =>
@@ -14,9 +16,10 @@ const Wrapper = styled.div<{ isDisplay: boolean }>`
 
 interface Props {
   isDisplay: boolean;
+  loadingStatus: LoadingStatus;
 }
 
-const Sample: React.SFC<Props> = ({ isDisplay }: Props) => {
+const Sample: React.SFC<Props> = ({ isDisplay, loadingStatus }: Props) => {
   const {
     data,
     isDisplayFetchMoreButton,
@@ -29,7 +32,11 @@ const Sample: React.SFC<Props> = ({ isDisplay }: Props) => {
   return (
     <Wrapper isDisplay={isDisplay}>
       <SearchBar setSearchKey={setSearchKey} value={searchKey} />
-      <Gallery data={data} />
+      {loadingStatus !== 'isProcessing' ? (
+        <Gallery data={data} />
+      ) : (
+        <Loader size={100} block />
+      )}
       <FetchMoreButton
         isDisplay={isDisplayFetchMoreButton}
         onSubmit={onHandleFetchMore}

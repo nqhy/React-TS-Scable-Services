@@ -7,7 +7,12 @@ import Search from './Search';
 import Favourites from './Favourites';
 
 const Sample: React.SFC<any> = () => {
-  const { selectedFunc, setFunc, totalFavourite } = useContainer();
+  const {
+    selectedFunc,
+    setFunc,
+    totalFavourite,
+    loadingStatus,
+  } = useContainer();
 
   const isSearch = selectedFunc === 'search';
   return (
@@ -17,7 +22,7 @@ const Sample: React.SFC<any> = () => {
         onHandleSelect={setFunc}
         totalFavourite={totalFavourite}
       />
-      <Search isDisplay={isSearch} />
+      <Search isDisplay={isSearch} loadingStatus={loadingStatus} />
       <Favourites isDisplay={!isSearch} />
     </>
   );
