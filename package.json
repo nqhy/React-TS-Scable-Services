@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@types/axios": "^0.14.0",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "dotenv-webpack": "^1.7.0",
     "history": "^4.10.1",
     "immer": "^4.0.2",
